@@ -43,16 +43,80 @@ class ignite {
         return ignite_database::select($table, $field, $value, $limit);
     }
 
+    public function query_select($table, $field, $value, $limit = -1) {
+        $this->check_connection();
+        $sql = ignite_database::select($table, $field, $value, $limit);
+        $this->query($sql);
+    }
+
     public function select_multiple($table, array $items, $allTrue, $limit = -1) {
         return ignite_database::select_multiple($table, $items, $allTrue, $limit);
+    }
+
+    public function query_select_multiple($table, array $items, $allTrue, $limit = -1) {
+        $this->check_connection();
+        $sql = ignite_database::select_multiple($table, $items, $allTrue, $limit);
+        $this->query($sql);
     }
 
     public function insert($table, array $item) {
         return ignite_database::insert($table, $item);
     }
 
+    public function query_insert($table, array $item) {
+        $this->check_connection();
+        $sql = ignite_database::insert($table, $item);
+        $this->query($sql);
+    }
+
     public function insert_multiple($table, array $items) {
         return ignite_database::insert_multiple($table, $items);
+    }
+
+    public function query_insert_multiple($table, array $items) {
+        $this->check_connection();
+        $sql = ignite_database::insert_multiple($table, $items);
+        $this->query($sql);
+    }
+
+    public function update($table, array $changes, $whereField, $whereValue) {
+        return ignite_database::update($table, $changes, $whereField, $whereValue);
+    }
+
+    public function query_update($table, array $changes, $whereField, $whereValue) {
+        $this->check_connection();
+        $sql = ignite_database::update($table, $changes, $whereField, $whereValue);
+        $this->query($sql);
+    }
+
+    public function update_multiple($table, array $changes, array $where, $allTrue) {
+        return ignite_database::update_multiple($table, $changes, $where, $allTrue);
+    }
+
+    public function query_update_multiple($table, array $changes, array $where, $allTrue) {
+        $this->check_connection();
+        $sql = ignite_database::update_multiple($table, $changes, $where, $allTrue);
+        $this->query($sql);
+    }
+
+    public function add_primary_key($table, $column) {
+        return ignite_database::add_primary_key($table, $column);
+    }
+
+    public function query_add_primary_key($table, $column) {
+        $this->check_connection();
+        $sql = ignite_database::add_primary_key($table, $column);
+        $this->query($sql);
+    }
+
+    public function remove_primary_key($table) {
+        return ignite_database::remove_primary_key($table);
+    }
+
+    public function query_remove_primary_key($table) {
+        $this->check_connection();
+        $sql = ignite_database::remove_primary_key($table);
+        $this->query($sql);
     }
 
     public function query($sql) {

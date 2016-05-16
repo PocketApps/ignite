@@ -19,7 +19,7 @@ Phpseclib. All encryption is powered by this awesome open-source library
 2. Include the library folder in your project
 3. Include the base class:  
     `include_once 'path/to/ignite.php';`
-4. Create a new instance of the class:
+4. Create a new instance of the class:  
     `$app = new ignite();`  
 5. Start writing your API's!
 
