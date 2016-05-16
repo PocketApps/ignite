@@ -76,4 +76,44 @@ class ignite_database {
 
         return substr($sqlStart, 0, strlen($sqlStart) - 2) . substr($sqlEnd, 0, strlen($sqlEnd) - 3);
     }
+
+    public static function update($table, array $changes, $whereField, $whereValue) {
+        $sql = "UPDATE $table SET ";
+        foreach ($changes as $field => $value) {
+            $sql .= "$field='$value', ";
+        }
+
+        return substr($sql, 0, strlen($sql) - 2) . " WHERE $whereField='$whereValue'";
+    }
+
+    public static function update_multiple($table, array $changes, array $where, $allTrue) {
+        $sql = "UPDATE $table SET ";
+        foreach ($changes as $field => $value) {
+            $sql .= "$field='$value', ";
+        }
+
+        $sql = substr($sql, 0, strlen($sql) - 2) . " WHERE ";
+        foreach ($where as $field => $value) {
+            $sql .= "$field='$value' ";
+            if ($allTrue) {
+                $sql .= "AND ";
+            } else {
+                $sql .= "OR ";
+            }
+        }
+
+        if ($allTrue) {
+            return substr($sql, 0, strlen($sql) - 4);
+        } else {
+            return substr($sql, 0, strlen($sql) - 3);
+        }
+    }
+
+    public static function add_primary_key($table, $column) {
+        return "ALTER TABLE '$table'  DROP PRIMARY KEY, ADD PRIMARY KEY ('$column')";
+    }
+
+    public static function remove_primary_key($table) {
+        return "ALTER TABLE '$table'  DROP PRIMARY KEY";
+    }
 }
